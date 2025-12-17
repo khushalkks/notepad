@@ -1,26 +1,32 @@
 AI Smart Notebook
+Intelligent AI-Powered Document Workspace
+Introduction
 
-An Intelligent AI-Powered Document Workspace
+AI Smart Notebook is a production-ready full-stack web application that enables users to upload, analyze, and interact with documents using Artificial Intelligence. The platform transforms static documents into interactive knowledge sources by providing AI-assisted summaries, question answering, and structured note generation inside a clean notebook-style workspace.
 
-AI Smart Notebook is a production-ready full-stack web application designed to help users upload, read, understand, and interact with documents using Artificial Intelligence. The platform enables intelligent document analysis, AI-assisted note generation, question answering, and concept visualization within a structured notebook-style interface.
+Objectives
 
-Overview
+Provide an intelligent document interaction platform
 
-The application acts as an AI-driven study and productivity tool that transforms static documents into interactive knowledge sources. Users can upload documents such as PDFs or text files and leverage AI to extract insights, summaries, and structured notes.
+Enable AI-assisted learning and productivity
 
-Key Capabilities
+Convert documents into structured and searchable knowledge
+
+Maintain a clean, scalable, and production-grade architecture
+
+Core Features
 
 Document upload and processing
 
 AI-based document understanding
 
-Automated summaries and note generation
+Automated summaries and structured notes
 
 Context-aware question answering
 
-Notebook-style workspace for structured learning
+Notebook-style workspace for organized learning
 
-Scalable and modular architecture
+Modular and scalable system design
 
 Technology Stack
 Frontend
@@ -39,29 +45,29 @@ Backend
 
 FastAPI (Python)
 
-RESTful API architecture
+REST-based API architecture
 
 Asynchronous request handling
 
-AI & Processing
+AI and Processing
 
-Large Language Model (OpenAI / Gemini / LLaMA)
+Large Language Models (OpenAI / Gemini / LLaMA)
 
-Text chunking and preprocessing
+Text preprocessing and chunking
 
-Prompt-based document interaction
+Prompt-based contextual responses
 
-Data Storage
+Database
 
 MongoDB
 
-Document metadata and notebook persistence
+Persistent storage for documents and notebooks
 
-Deployment (Optional / Planned)
+Deployment (Optional)
 
-Frontend: Vercel or Netlify
+Frontend: Vercel / Netlify
 
-Backend: Render or Railway
+Backend: Render / Railway
 
 Database: MongoDB Atlas
 
@@ -104,19 +110,19 @@ npm install
 npm run dev
 
 
-The frontend will be available at:
+Frontend runs at:
 
 http://localhost:5173
 
 Backend Setup
 cd backend
 python -m venv venv
-source venv/bin/activate        # Windows: venv\Scripts\activate
+source venv/binactivate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 
 
-The backend will be available at:
+Backend runs at:
 
 http://localhost:8000
 
@@ -126,55 +132,55 @@ User uploads a document
 
 Backend extracts and preprocesses text
 
-Document content is chunked and analyzed
+Document content is chunked for AI processing
 
-AI model processes document context
+AI model analyzes document context
 
-User interacts via notebook or chat interface
+User interacts through notebook or chat interface
 
 AI generates summaries, answers, and notes
 
-Data is stored for future access
+Data is stored for later access
 
 Use Cases
 
-Students and academic learners
+Academic learning and study assistance
 
-Researchers handling large documents
+Research and document analysis
 
-Professionals reviewing reports or manuals
+Professional report review
 
-AI-assisted note-taking and study workflows
+AI-assisted note-taking workflows
 
 Design Principles
 
-Type-safe frontend using TypeScript
+Strong type safety using TypeScript
 
-Clear separation of concerns
+Clear separation between frontend and backend
 
-Scalable API-driven architecture
+Modular and maintainable architecture
 
 Clean and minimal user interface
 
-Production-ready project structure
+Production-oriented project structure
 
 Future Enhancements
 
-User authentication and authorization
+User authentication and role management
 
 Multi-document notebooks
 
-AI-generated quizzes
+AI-generated quizzes and assessments
 
-Export notes as PDF or DOCX
+Export notes to PDF and DOCX
 
-Multi-language document support
+Multilingual document support
 
 Author
 
 Khushal Kumar Sahu
-Full Stack Developer | AI and Web Technologies
+Full-Stack Developer | AI and Web Technologies
 
 License
 
-This project is intended for educational and academic use.
+This project is intended for academic and educational use.
