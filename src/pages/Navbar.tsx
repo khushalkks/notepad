@@ -1,8 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import UploadModal from './UploadModal';
+import { useLocation } from "react-router-dom";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from '../hooks/UseTheme';
+
 
 const Navbar = () => {
+  const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+      if (location.state?.openUpload) {
+        setIsUploadOpen(true);
+      }
+    }, [location.state]);
 
   return (
     <nav className='w-full h-16 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700 shadow-lg relative z-50'>
@@ -28,23 +42,31 @@ const Navbar = () => {
             <NavLink href='/notebooks' icon='book'>
               My Notebooks
             </NavLink>
-            <NavLink href='/documents' icon='file'>
-              Documents
-            </NavLink>
-            <NavLink href='/chat' icon='message'>
-              AI Chat
-            </NavLink>
+           
           </div>
 
           {/* Right Side Actions */}
           <div className='hidden md:flex items-center space-x-4'>
             {/* Upload Button */}
-            <button className='px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 flex items-center space-x-2 backdrop-blur-sm'>
+            <button 
+            onClick={() => setIsUploadOpen(true)}
+            className='px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 flex items-center space-x-2 backdrop-blur-sm'>
               <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                 <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' />
               </svg>
               <span className='text-sm font-medium'>Upload</span>
             </button>
+             <button
+          onClick={toggleTheme}
+          className="p-2 rounded-lg hover:bg-white/10 transition"
+        >
+          {theme === "dark" ? (
+            <Sun className="w-5 h-5 text-yellow-300" />
+          ) : (
+            <Moon className="w-5 h-5 text-white" />
+          )}
+        </button>
+
 
             {/* Notifications */}
             <button className='relative p-2 hover:bg-white/10 rounded-lg transition-colors'>
@@ -84,6 +106,7 @@ const Navbar = () => {
               )}
             </div>
           </div>
+         
 
           {/* Mobile Menu Button */}
           <button
@@ -107,10 +130,11 @@ const Navbar = () => {
           <div className='px-4 py-3 space-y-2'>
             <MobileNavLink href='/' active>Home</MobileNavLink>
             <MobileNavLink href='/notebooks'>My Notebooks</MobileNavLink>
-            <MobileNavLink href='/documents'>Documents</MobileNavLink>
-            <MobileNavLink href='/chat'>AI Chat</MobileNavLink>
+           
             <div className='border-t border-purple-600 my-2 pt-2'>
-              <button className='w-full px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all flex items-center justify-center space-x-2'>
+              <button 
+              onClick={() => setIsUploadOpen(true)}
+              className='w-full px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all flex items-center justify-center space-x-2'>
                 <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
                   <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' />
                 </svg>
@@ -119,8 +143,14 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+        
       )}
+      <UploadModal
+  isOpen={isUploadOpen}
+  onClose={() => setIsUploadOpen(false)}
+/>
     </nav>
+    
   );
 };
 
@@ -189,6 +219,7 @@ const DropdownItem = ({ icon, children, danger = false }: { icon: string; childr
       </svg>
       <span className='text-sm'>{children}</span>
     </a>
+    
   );
 };
 
