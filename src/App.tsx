@@ -1,20 +1,35 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from './pages/Home'
-import Navbar from './pages/Navbar'
-import SignUp from './pages/SignUp'
-import Login from './pages/Login'
+import Home from "./pages/Home";
+import Notebook from "./pages/Notebook";
+import PublicLayout from "./Layouts/PublicLayout";
+import AppLayout from "./Layouts/AppLayout";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";    
+import MindMap from "./pages/MindMap";
+import Quiz from "./pages/Quiz";
+
 const App = () => {
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Home />} />
-      <Route path='/navbar' element={<Navbar />} />
-      <Route path='/signup' element={<SignUp />} />
-      <Route path='/login' element={<Login/>} />
-    </Routes>
-    </BrowserRouter>
-    
-  )
-}
+      <Routes>
 
-export default App
+        {/* 🌐 Public pages (NO navbar) */}
+        <Route element={<PublicLayout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+
+        {/* 🔐 App pages (WITH navbar) */}
+        <Route element={<AppLayout />}>
+          <Route path="/notebooks" element={<Notebook />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/mindmap" element={<MindMap />} />
+          <Route path="/quiz" element={<Quiz />} />
+        </Route>
+
+      </Routes>
+    </BrowserRouter>
+  );
+};
+
+export default App;

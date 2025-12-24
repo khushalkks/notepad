@@ -1,6 +1,13 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+    const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate("/notebooks", {
+      state: { openUpload: true },
+    });
+  };
   return (
     <div className='min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50'>
       {/* Hero Section */}
@@ -59,7 +66,9 @@ const Home = () => {
 
         {/* CTA Section */}
         <div className='text-center mt-16'>
-          <button className='px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105'>
+          <button 
+          onClick={handleGetStarted}
+          className='px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105'>
             Get Started Now
           </button>
           <p className='mt-4 text-blue-500'>
