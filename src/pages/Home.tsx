@@ -1,138 +1,136 @@
-import { useNavigate } from "react-router-dom";
+import { Brain, FileText, Sparkles, Network, Zap, BookOpen } from "lucide-react"
 
-const Home = () => {
-    const navigate = useNavigate();
-
+const Home: React.FC = () => {
   const handleGetStarted = () => {
-    navigate("/notebooks", {
-      state: { openUpload: true },
-    });
-  };
+    // Navigate to notebook page
+    window.location.href = "/notebook"
+  }
+
+  const features = [
+    {
+      icon: <FileText className="w-6 h-6" />,
+      title: "Document Upload",
+      description: "PDF, DOCX, TXT support"
+    },
+    {
+      icon: <Brain className="w-6 h-6" />,
+      title: "AI Q&A",
+      description: "Ask anything about your docs"
+    },
+    {
+      icon: <Sparkles className="w-6 h-6" />,
+      title: "Smart Summaries",
+      description: "Instant key insights"
+    },
+    {
+      icon: <Network className="w-6 h-6" />,
+      title: "Mind Maps",
+      description: "Visual concept mapping"
+    }
+  ]
+
   return (
-    <div className='min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50'>
-      {/* Hero Section */}
-      <div className='p-6 max-w-7xl mx-auto'>
-        {/* Main Heading */}
-        <div className='text-center py-12'>
-          <h1 className='text-5xl font-bold text-blue-600 mb-4'>
-            AI-LLM Notebook
-          </h1>
-          <p className='text-xl text-blue-500 font-medium'>
-            Transform your documents into interactive knowledge sources
-          </p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Animated background effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute w-96 h-96 -top-48 -left-48 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse"></div>
+        <div className="absolute w-96 h-96 -bottom-48 -right-48 bg-indigo-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-12">
+        {/* Logo/Brand */}
+        <div className="flex items-center gap-3 mb-8 animate-fadeIn">
+          <div className="bg-gradient-to-br from-purple-500 to-indigo-600 p-3 rounded-2xl shadow-lg shadow-purple-500/50">
+            <BookOpen className="w-8 h-8 text-white" />
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900">AI Smart Notebook</h1>
         </div>
 
-        {/* Feature Cards */}
-        <div className='grid md:grid-cols-3 gap-6 mt-12'>
-          {/* Card 1 */}
-          <div className='bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-blue-500'>
-            <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4'>
-              <svg className='w-6 h-6 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' />
-              </svg>
-            </div>
-            <h3 className='text-xl font-bold text-blue-700 mb-2'>Upload Documents</h3>
-            <p className='text-blue-600'>
-              Support for PDF, DOCX, TXT, and images with automatic OCR text extraction
-            </p>
-          </div>
-
-          {/* Card 2 */}
-          <div className='bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-blue-500'>
-            <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4'>
-              <svg className='w-6 h-6 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z' />
-              </svg>
-            </div>
-            <h3 className='text-xl font-bold text-blue-700 mb-2'>AI Analysis</h3>
-            <p className='text-blue-600'>
-              Get intelligent summaries, structured notes, and context-aware answers
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className='bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow border-t-4 border-blue-500'>
-            <div className='w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4'>
-              <svg className='w-6 h-6 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z' />
-              </svg>
-            </div>
-            <h3 className='text-xl font-bold text-blue-700 mb-2'>Interactive Chat</h3>
-            <p className='text-blue-600'>
-              Ask questions and get instant answers from your documents using AI
-            </p>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className='text-center mt-16'>
-          <button 
-          onClick={handleGetStarted}
-          className='px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold text-lg rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:scale-105'>
-            Get Started Now
-          </button>
-          <p className='mt-4 text-blue-500'>
-            Start transforming your documents into smart notebooks
-          </p>
-        </div>
-
-        {/* Stats Section */}
-        <div className='grid md:grid-cols-4 gap-6 mt-16 bg-blue-600 rounded-2xl p-8 text-white'>
-          <div className='text-center'>
-            <p className='text-4xl font-bold'>24+</p>
-            <p className='text-blue-200 mt-2'>Documents Processed</p>
-          </div>
-          <div className='text-center'>
-            <p className='text-4xl font-bold'>156+</p>
-            <p className='text-blue-200 mt-2'>Questions Answered</p>
-          </div>
-          <div className='text-center'>
-            <p className='text-4xl font-bold'>42+</p>
-            <p className='text-blue-200 mt-2'>Notes Generated</p>
-          </div>
-          <div className='text-center'>
-            <p className='text-4xl font-bold'>8+</p>
-            <p className='text-blue-200 mt-2'>Notebooks Created</p>
-          </div>
-        </div>
-
-        {/* How It Works Section */}
-        <div className='mt-16'>
-          <h2 className='text-3xl font-bold text-blue-600 text-center mb-8'>
-            How It Works
+        {/* Hero Section */}
+        <div className="text-center max-w-3xl mb-12">
+          <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            Your documents,
+            <br />
+            <span className="bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+              supercharged by AI
+            </span>
           </h2>
-          <div className='grid md:grid-cols-4 gap-4'>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
-                1
+
+          <p className="text-xl text-gray-700 mb-8 leading-relaxed">
+            Transform your documents into interactive knowledge. Upload, ask questions,
+            generate summaries, and visualize concepts with AI-powered insights.
+          </p>
+
+          <button
+            onClick={handleGetStarted}
+            className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-4 rounded-2xl font-semibold text-lg shadow-xl shadow-purple-500/50 hover:shadow-2xl hover:shadow-purple-500/60 transition-all duration-300 hover:scale-105"
+          >
+            <Zap className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+            Get Started
+            <span className="absolute inset-0 rounded-2xl bg-white opacity-0 group-hover:opacity-10 transition-opacity"></span>
+          </button>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl w-full">
+          {features.map((feature, index) => (
+            <div
+              key={index}
+              className="group bg-white backdrop-blur-lg border border-gray-200 rounded-2xl p-6 hover:bg-gray-50 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-200"
+              style={{
+                animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`
+              }}
+            >
+              <div className="bg-gradient-to-br from-purple-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-lg shadow-purple-300">
+                {feature.icon}
               </div>
-              <h4 className='font-bold text-blue-700 mb-2'>Upload</h4>
-              <p className='text-blue-600 text-sm'>Upload your document</p>
+              <h3 className="text-gray-900 font-semibold text-lg mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-gray-600 text-sm">
+                {feature.description}
+              </p>
             </div>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
-                2
-              </div>
-              <h4 className='font-bold text-blue-700 mb-2'>Process</h4>
-              <p className='text-blue-600 text-sm'>AI extracts and analyzes</p>
-            </div>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
-                3
-              </div>
-              <h4 className='font-bold text-blue-700 mb-2'>Interact</h4>
-              <p className='text-blue-600 text-sm'>Ask questions and learn</p>
-            </div>
-            <div className='text-center'>
-              <div className='w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4'>
-                4
-              </div>
-              <h4 className='font-bold text-blue-700 mb-2'>Save</h4>
-              <p className='text-blue-600 text-sm'>Create smart notebooks</p>
-            </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Footer Note */}
+        <div className="mt-16 text-center">
+          <p className="text-gray-600 text-sm">
+            Powered by advanced AI • Secure & Private
+          </p>
         </div>
       </div>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-fadeIn {
+          animation: fadeIn 1s ease-out;
+        }
+
+        .delay-1000 {
+          animation-delay: 1s;
+        }
+      `}</style>
     </div>
   )
 }
