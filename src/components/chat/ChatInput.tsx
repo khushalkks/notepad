@@ -1,33 +1,33 @@
 import { useState } from "react";
 
-type Props = {
-  onSend: (text: string) => void;
-};
+interface ChatInputProps {
+  onSend: (msg: string) => void;
+}
 
-const ChatInput = ({ onSend }: Props) => {
-  const [text, setText] = useState("");
+export default function ChatInput({ onSend }: ChatInputProps) {
+  const [message, setMessage] = useState("");
+
+  const handleSend = () => {
+    if (!message.trim()) return;
+    onSend(message);
+    setMessage("");
+  };
 
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (!text.trim()) return;
-        onSend(text);
-        setText("");
-      }}
-      className="flex gap-2"
-    >
+    <div className="flex gap-3 mt-3">
       <input
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        className="flex-1 border rounded-lg px-3 py-2"
-        placeholder="Ask AI..."
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Ask anything..."
+        className="flex-1 p-3 rounded-xl bg-white/15 border border-white/30 text-white focus:outline-none focus:ring-2 focus:ring-purple-400"
       />
-      <button className="bg-purple-600 text-white px-4 rounded-lg">
+
+      <button
+        onClick={handleSend}
+        className="px-5 py-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-500 hover:scale-105 transition"
+      >
         Send
       </button>
-    </form>
+    </div>
   );
-};
-
-export default ChatInput;
+}
