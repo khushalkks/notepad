@@ -1,29 +1,24 @@
-const Login: React.FC = () => {
+export default function Login() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Login
-        </h2>
+    <div className="w-full max-w-sm bg-white p-6 rounded shadow">
+      <h2 className="text-xl font-semibold mb-4 text-center">
+        Login
+      </h2>
 
-        <input
-          type="email"
-          placeholder="Email"
-          className="w-full p-3 border rounded mb-4"
-        />
+      <input
+        className="border p-2 w-full mb-3"
+        placeholder="Email"
+      />
 
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-3 border rounded mb-4"
-        />
+      <input
+        className="border p-2 w-full mb-4"
+        type="password"
+        placeholder="Password"
+      />
 
-        <button className="w-full bg-indigo-600 text-white py-3 rounded hover:bg-indigo-700">
-          Login
-        </button>
-      </div>
+      <button className="w-full bg-black text-white py-2 rounded">
+        Login
+      </button>
     </div>
   )
 }
-
-export default Login
