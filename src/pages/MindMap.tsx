@@ -1,69 +1,80 @@
-import { useState } from "react";
+import { useState } from "react"
 
-interface NodeType {
-  id: number;
-  text: string;
+interface Node {
+  id: number
+  text: string
 }
 
 export default function MindMap() {
-  const [nodes, setNodes] = useState<NodeType[]>([
-    { id: 1, text: "Main Idea" },
-    { id: 2, text: "Topic 1" },
-    { id: 3, text: "Topic 2" },
-    { id: 4, text: "Topic 3" },
-  ]);
+  const [centerText, setCenterText] = useState("Main Topic")
+  const [nodes, setNodes] = useState<Node[]>([])
+  const [input, setInput] = useState("")
 
   const addNode = () => {
-    const newId = nodes.length + 1;
-    setNodes([...nodes, { id: newId, text: `New Node ${newId}` }]);
-  };
+    if (!input.trim()) return
+    setNodes([...nodes, { id: Date.now(), text: input }])
+    setInput("")
+  }
+
+  const deleteNode = (id: number) => {
+    setNodes(nodes.filter((n) => n.id !== id))
+  }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#020617] via-[#0f172a] to-[#312e81] text-white p-10">
+    <div className="max-w-5xl mx-auto">
+      <h2 className="text-2xl font-semibold mb-6">Mind Map</h2>
 
-      {/* Header */}
-      <h1 className="text-4xl font-extrabold mb-6 tracking-wide">
-        AI Mind Map <span className="text-purple-400">🧠</span>
-      </h1>
+      {/* Controls */}
+      <div className="mb-6 flex gap-2">
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Add sub-topic"
+          className="flex-1 border p-2 rounded"
+        />
+        <button
+          onClick={addNode}
+          className="bg-black text-white px-4 rounded"
+        >
+          Add
+        </button>
+      </div>
 
-      <p className="text-gray-300 mb-6 text-center max-w-2xl">
-        Visualize your ideas, explore relationships, and structure your thoughts
-        in an interactive and beautiful mind map.
-      </p>
-
-      {/* Action Button */}
-      <button
-        onClick={addNode}
-        className="mb-6 px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 shadow-lg hover:scale-105 transition"
-      >
-        ➕ Add Node
-      </button>
-
-      {/* Mind Map Board */}
-      <div className="relative w-full max-w-5xl h-[550px] bg-white/10 border border-white/20 rounded-3xl backdrop-blur-xl shadow-xl overflow-hidden p-6">
+      {/* Mind Map Area */}
+      <div className="relative bg-white border rounded p-10 min-h-[300px]">
 
         {/* Center Node */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <div className="px-6 py-4 rounded-full bg-purple-600 shadow-xl border border-purple-300">
-            Main Idea
-          </div>
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                        bg-blue-600 text-white px-6 py-3 rounded-full font-semibold">
+          {centerText}
         </div>
 
         {/* Child Nodes */}
-        <div className="w-full h-full flex items-center justify-center">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {nodes.map((node) => (
-              <div
-                key={node.id}
-                className="px-5 py-3 bg-white/10 border border-white/30 rounded-2xl text-center shadow-md hover:bg-white/20 transition"
-              >
-                {node.text}
-              </div>
-            ))}
-          </div>
-        </div>
+        <div className="flex flex-wrap gap-6 justify-center mt-32">
+          {nodes.map((node) => (
+            <div
+              key={node.id}
+              className="relative bg-gray-100 px-4 py-2 rounded shadow"
+            >
+              {node.text}
 
+              <button
+                onClick={() => deleteNode(node.id)}
+                className="absolute -top-2 -right-2 bg-red-500 text-white
+                           text-xs w-5 h-5 rounded-full"
+              >
+                ×
+              </button>
+            </div>
+          ))}
+
+          {nodes.length === 0 && (
+            <p className="text-gray-500">
+              No sub-topics yet. Add one above.
+            </p>
+          )}
+        </div>
       </div>
     </div>
-  );
+  )
 }
