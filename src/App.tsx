@@ -21,6 +21,7 @@ const App = () => {
         {/* 🔐 App pages (WITH navbar) */}
         <Route element={<AppLayout />}>
           <Route path="/notebooks" element={<Notebook />} />
+          <Route path="/notebooks/:notebookId" element={<Notebook />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/mindmap" element={<MindMap />} />

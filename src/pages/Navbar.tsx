@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import UploadModal from './UploadModal';
-import { useLocation } from "react-router-dom";
+import React, { useState } from 'react';
+
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from '../hooks/UseTheme';
 
@@ -9,103 +8,88 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isUploadOpen, setIsUploadOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-      if (location.state?.openUpload) {
-        setIsUploadOpen(true);
-      }
-    }, [location.state]);
-
+  
   return (
-    <nav className='w-full h-16 bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-700 shadow-lg relative z-50'>
+    <nav className={`w-full h-16 ${theme === 'dark' ? 'bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900' : 'bg-gradient-to-r from-purple-600 via-purple-500 to-indigo-600'} shadow-lg relative z-50`}>
       <div className='max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8'>
-        <div className='flex items-center justify-between h-full'>
-          {/* Logo & Brand */}
-          <div className='flex items-center space-x-3'>
-            <div className='w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm'>
-              <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z' />
-              </svg>
-            </div>
-            <h1 className='text-xl font-bold text-white tracking-tight'>
-              AI Smart Notebook
-            </h1>
-          </div>
+      <div className='flex items-center justify-between h-full'>
+        {/* Logo & Brand */}
+        <div className='flex items-center space-x-3'>
+        <div className={`w-10 h-10 ${theme === 'dark' ? 'bg-white/20' : 'bg-white/30'} rounded-lg flex items-center justify-center backdrop-blur-sm`}>
+          <svg className='w-6 h-6 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z' />
+          </svg>
+        </div>
+        <h1 className='text-xl font-bold text-white tracking-tight'>
+          AI Smart Notebook
+        </h1>
+        </div>
 
-          {/* Desktop Navigation */}
-          <div className='hidden md:flex items-center space-x-1'>
-            <NavLink href='/' icon='home' active>
-              Home
-            </NavLink>
-            <NavLink href='/notebooks' icon='book'>
-              My Notebooks
-            </NavLink>
-           
-          </div>
+        {/* Desktop Navigation */}
+        <div className='hidden md:flex items-center space-x-1'>
+        <NavLink href='/' icon='home' active>
+          Home
+        </NavLink>
+        <NavLink href='/notebooks' icon='book'>
+          My Notebooks
+        </NavLink>
+         
+        </div>
 
-          {/* Right Side Actions */}
-          <div className='hidden md:flex items-center space-x-4'>
-            {/* Upload Button */}
-            <button 
-            onClick={() => setIsUploadOpen(true)}
-            className='px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all duration-200 flex items-center space-x-2 backdrop-blur-sm'>
-              <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' />
-              </svg>
-              <span className='text-sm font-medium'>Upload</span>
-            </button>
-             <button
-          onClick={toggleTheme}
-          className="p-2 rounded-lg hover:bg-white/10 transition"
-        >
-          {theme === "dark" ? (
-            <Sun className="w-5 h-5 text-yellow-300" />
-          ) : (
-            <Moon className="w-5 h-5 text-white" />
-          )}
+        {/* Right Side Actions */}
+        <div className='hidden md:flex items-center space-x-4'>
+        {/* Upload Button */}
+        
+         <button
+        onClick={toggleTheme}
+        className="p-2 rounded-lg hover:bg-white/10 transition"
+      >
+        {theme === "dark" ? (
+        <Sun className="w-5 h-5 text-yellow-300" />
+        ) : (
+        <Moon className="w-5 h-5 text-white" />
+        )}
+      </button>
+
+
+        {/* Notifications */}
+        <button className='relative p-2 hover:bg-white/10 rounded-lg transition-colors'>
+          <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9' />
+          </svg>
+          <span className='absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full'></span>
         </button>
 
-
-            {/* Notifications */}
-            <button className='relative p-2 hover:bg-white/10 rounded-lg transition-colors'>
-              <svg className='w-5 h-5 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9' />
-              </svg>
-              <span className='absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full'></span>
-            </button>
-
-            {/* User Menu */}
-            <div className='relative'>
-              <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className='flex items-center space-x-3 p-2 hover:bg-white/10 rounded-lg transition-colors'
-              >
-                <div className='w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center'>
-                  <span className='text-white text-sm font-bold'>KS</span>
-                </div>
-                <svg className='w-4 h-4 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
-                </svg>
-              </button>
-
-              {/* User Dropdown */}
-              {isUserMenuOpen && (
-                <div className='absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-2xl py-2 z-[100] border border-gray-200'>
-                  <div className='px-4 py-3 border-b'>
-                    <p className='text-sm font-semibold text-gray-800'>Khushal Kumar Sahu</p>
-                    <p className='text-xs text-gray-500'>khushal@example.com</p>
-                  </div>
-                  <DropdownItem icon='user'>Profile</DropdownItem>
-                  <DropdownItem icon='settings'>Settings</DropdownItem>
-                  <DropdownItem icon='chart'>Statistics</DropdownItem>
-                  <div className='border-t my-2'></div>
-                  <DropdownItem icon='logout' danger>Logout</DropdownItem>
-                </div>
-              )}
-            </div>
+        {/* User Menu */}
+        <div className='relative'>
+          <button
+          onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+          className='flex items-center space-x-3 p-2 hover:bg-white/10 rounded-lg transition-colors'
+          >
+          <div className='w-8 h-8 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full flex items-center justify-center'>
+            <span className='text-white text-sm font-bold'>KS</span>
           </div>
+          <svg className='w-4 h-4 text-white' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+            <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M19 9l-7 7-7-7' />
+          </svg>
+          </button>
+
+          {/* User Dropdown */}
+          {isUserMenuOpen && (
+          <div className={`absolute right-0 mt-2 w-56 ${theme === 'dark' ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-200'} rounded-lg shadow-2xl py-2 z-[100] border`}>
+            <div className={`px-4 py-3 border-b ${theme === 'dark' ? 'border-gray-700' : 'border-gray-200'}`}>
+            <p className={`text-sm font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-800'}`}>Khushal Kumar Sahu</p>
+            <p className={`text-xs ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>khushal@example.com</p>
+            </div>
+            <DropdownItem icon='user'>Profile</DropdownItem>
+            <DropdownItem icon='settings'>Settings</DropdownItem>
+            <DropdownItem icon='chart'>Statistics</DropdownItem>
+            <div className={`border-t my-2 ${theme === 'dark' ? 'border-gray-700' : ''}`}></div>
+            <DropdownItem icon='logout' danger>Logout</DropdownItem>
+          </div>
+          )}
+        </div>
+        </div>
          
 
           {/* Mobile Menu Button */}
@@ -132,23 +116,13 @@ const Navbar = () => {
             <MobileNavLink href='/notebooks'>My Notebooks</MobileNavLink>
            
             <div className='border-t border-purple-600 my-2 pt-2'>
-              <button 
-              onClick={() => setIsUploadOpen(true)}
-              className='w-full px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg transition-all flex items-center justify-center space-x-2'>
-                <svg className='w-4 h-4' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12' />
-                </svg>
-                <span className='text-sm font-medium'>Upload Document</span>
-              </button>
+              
             </div>
           </div>
         </div>
         
       )}
-      <UploadModal
-  isOpen={isUploadOpen}
-  onClose={() => setIsUploadOpen(false)}
-/>
+    
     </nav>
     
   );
